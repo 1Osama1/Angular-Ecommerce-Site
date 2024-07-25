@@ -32,6 +32,10 @@ navigateToProduct(productId: number): void {
   //https://api.escuelajs.co/api/v1/products/40
 }
 
+removeQuotes(text: string): string {
+  return text.replace(/['"]+/g, '');
+}
+
 
 getSafeUrl(url: string): SafeUrl {
   return this.sanitizer.bypassSecurityTrustUrl(url);

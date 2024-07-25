@@ -4,17 +4,15 @@
     </div>
     <div class="row">
         <div class="col-md-5 col-sm-12">
-            <img src="{{product.images[0]}}" alt="Product Image">
+            <img [src]="product.images[0]" alt="Product Image">
         </div>
         <div class="col-md-7 col-sm-12">
             <div class="info">
                 <ul class="list-unstyled" *ngIf="!loading">
-                    <li style="font-weight: bolder;">Title : {{product.title}}</li>
-                    <li style="font-weight: bolder;">Category : {{product.category.name}}</li>
-                    <li style="font-weight: bolder;">description : {{product.description}}</li>
-                    <li style="font-weight: bolder;">Rate : {{product.rating.rate}}</li>
-                    <li style="font-weight: bolder;">Count : {{product.rating.count}}</li>
-                    <li style="font-weight: bolder;">Price : {{product.price}}</li>
+                    <li><strong>Title : </strong> {{product.title}}</li>
+                    <li><strong>Category : </strong>  {{product.category.name}}</li>
+                    <li><strong>description : </strong>  {{product.description}}</li>
+                    <li><strong>Price : </strong>  {{product.price}}</li>
                 </ul>
 
             </div>

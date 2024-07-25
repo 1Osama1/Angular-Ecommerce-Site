@@ -9,27 +9,38 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductsDetailsComponent {
 
-  product:any
+  product: any = { images: [] }; // Default empty images array
   loading : boolean = false;
   id!:any 
 
   constructor( private service:ProductsService ,private route:ActivatedRoute ) {
     this.id = this.route.snapshot.paramMap.get("id") 
-    console.log(this.id)
   }
   ngOnInit():void {
     this.getProduct()
-    console.log(this.product)
   }
   getProduct(){
     this.loading = true;
-    this.service.getProductById(this.id).subscribe((res:any)=>{
+
+
+    this.service.getProductById(this.id).subscribe((res: any) => {
       this.product = res;
+      this.product.images = this.sanitizeImageUrl(this.product.images);
       this.loading = false;
-    } , ( error) =>{
+    }, ( error) =>{
       alert("Error");
       this.loading = false;
       console.log(error.message);
     })
   }
+
+  
+  sanitizeImageUrl(urls: string[]): string[] {
+    const regex = /(http[s]?:\/\/.*?\.(?:jpg|jpeg|png))/gi;
+    return urls.map(url => {
+      const matches = url.match(regex);
+      return matches && matches.length > 0 ? matches[0] : ''; // Return the first valid URL or empty string
+    });
+  }
+  
 }

@@ -8,11 +8,11 @@ export class ProductsService {
 
   constructor(private http:HttpClient) { }
   getAllProducts(){
-    return this.http.get("https://6699902f2069c438cd729a3c.mockapi.io/api/Ocommerce/products");
+    return this.http.get("https://api.escuelajs.co/api/v1/products");
   }
 
   getAllCategories(){
-    return this.http.get("https://6699902f2069c438cd729a3c.mockapi.io/api/Ocommerce/categories");
+    return this.http.get("https://api.escuelajs.co/api/v1/categories");
   }
 
 

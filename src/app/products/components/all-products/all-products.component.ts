@@ -18,6 +18,8 @@ cartProducts:any[]=[]
 chosenCategory:string = ''
 category :any;
 loading : boolean = false;
+gridView:boolean = true
+
 
 constructor( private service:ProductsService , private router: Router , private sanitizer: DomSanitizer) {}
 ngOnInit():void {
@@ -53,7 +55,7 @@ getProducts(){
 getCategories(){
   this.loading = true;
   this.service.getAllCategories().subscribe((res:any)=>{
-    this.categories = res;
+    this.categories = res.map((category: any) => category.name);
     this.loading = false;
   } , ( error) =>{
     this.loading = false;
@@ -86,6 +88,11 @@ filterCategory(event:any){
         console.log(error.message);
       })
     }
+}
+
+
+toggleGridView(){
+  this.gridView = !this.gridView
 }
 
 addToCart(event: any): void {

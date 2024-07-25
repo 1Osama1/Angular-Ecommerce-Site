@@ -1,15 +1,56 @@
 
 <div class="mt-5">
-    <div class="my-2 w-25">
-        <app-select [items]="categories" [title]="'Categories'" (selectedValue)="filterCategory($event)"></app-select>
-    </div>
-    <div class="text-center w-100" *ngIf="loading">
-        <app-spinner></app-spinner>
-    </div>
-    <div class="row p-3" *ngIf="!loading">
-        <div class="col-md-3 col-sm-1 product-card" *ngFor="let product of products">
-            <app-product [data]="product" (item)="addToCart($event)"></app-product>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="my-2 w-25">
+                <app-select [items]="categories" [title]="'Categories'" (selectedValue)="filterCategory($event)"></app-select>
+            </div>
+            <div *ngIf="!gridView" class="d-flex align-items-center viewControl mx-4">
+                <img (click)="toggleGridView()" src="https://api.iconify.design/mdi:dots-grid.svg" class="" alt="icon">
+            </div>
+            <div *ngIf="gridView" class="d-flex align-items-center viewControl mx-4">
+                <img (click)="toggleGridView()" src="https://api.iconify.design/ic:twotone-format-list-bulleted.svg" class="" alt="icon">
+            </div>
         </div>
+        <div class="text-center w-100" *ngIf="loading">
+            <app-spinner></app-spinner>
         </div>
+        <div *ngIf="gridView && !loading" class="row p-3">
+            <div class="col-md-3 col-sm-1 product-card" *ngFor="let product of products">
+                <app-product [data]="product" (item)="addToCart($event)"></app-product>
+            </div>
+        </div>
+            <div *ngIf="!gridView && !loading">
+        
+        
+        
+            <div class="modal-table">
+                <div class="table-header">
+                    <div class="table-cell"></div>
+                    <div class="table-cell">Name</div>
+                    <div class="table-cell">Description</div>
+                    <div class="table-cell">Category</div>
+                    <div class="table-cell">Price</div>
+                    <div class="table-cell"></div>
+                </div>
+                <div class="table-row" *ngFor="let product of products; let i = index">
+                    <div class="table-cell"><img class="rounded" [src]="product.images[0]" alt="Photo" width="50"></div>
+                    <div class="table-cell">{{product.title}}</div>
+                    <div class="table-cell description">{{product.description}}</div>
+                    <div class="table-cell">{{product.category.name }}</div>
+                    <div class="table-cell">{{product.price | currency }}</div>
+                    <div class="table-cell">
+                    </div>            
+                </div>
+                </div>
+            </div>
+        
+        
+
+
+
+
+
+
+
 </div>
 
